@@ -3,4 +3,6 @@ kind: Kustomization
 
 resources:
 - 00_Namespace.yaml
-- 01_DaemonSet.yaml
+- 01_ServiceAccount.yaml
+- 02_ClusterRoleBinding.yaml
+- 03_DaemonSet.yaml
