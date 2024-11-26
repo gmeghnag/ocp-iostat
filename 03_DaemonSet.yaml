@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: ocp-master-iostat
+  name: ocp-iostat
   namespace: ocp-iostat
 spec:
   selector:
     matchLabels:
-      app: ocp-master-iostat
+      app: ocp-iostat
   template:
     metadata:
       labels:
-        app: ocp-master-iostat
+        app: ocp-iostat
     spec:
-      serviceAccountName: ocp-master-iostat
+      serviceAccountName: ocp-iostat
       volumes:
       - hostPath:
         path: /
@@ -21,8 +21,6 @@ spec:
       hostPID: true
       hostIPC: true
       hostNetwork: true
-      nodeSelector:
-        node-role.kubernetes.io/master: ""
       tolerations:
       - operator: Exists
       containers:
