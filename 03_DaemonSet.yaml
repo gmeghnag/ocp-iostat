@@ -12,6 +12,7 @@ spec:
       labels:
         app: ocp-master-iostat
     spec:
+      serviceAccountName: ocp-master-iostat
       volumes:
       - hostPath:
         path: /
