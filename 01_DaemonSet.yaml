@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ocp-master-iostat
+  namespace: ocp-iostat
+spec:
+  selector:
+    matchLabels:
+      app: ocp-master-iostat
+  template:
+    metadata:
+      labels:
+        app: ocp-master-iostat
+    spec:
+      volumes:
+      - hostPath:
+        path: /
+        type: Directory
+        name: host
+      hostPID: true
+      hostIPC: true
+      hostNetwork: true
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      containers:
+      - name: iostat
+        volumeMounts:
+        - mountPath: /
+          name: host
+        image: quay.io/gmeghnag/iostat
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: ["/bin/sh"]
+        args: ["-c", "iostat -w 2 -x -m"]
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
