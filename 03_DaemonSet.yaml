@@ -22,6 +22,8 @@ spec:
       hostNetwork: true
       nodeSelector:
         node-role.kubernetes.io/master: ""
+      tolerations:
+      - operator: Exists
       containers:
       - name: iostat
         volumeMounts:
