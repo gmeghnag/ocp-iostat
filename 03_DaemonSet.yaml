@@ -28,15 +28,15 @@ spec:
       containers:
       - name: iostat
         volumeMounts:
-        - mountPath: /
+        - mountPath: /host
           name: host
         image: quay.io/gmeghnag/iostat
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         securityContext:
           privileged: true
           runAsUser: 0
         command: ["/bin/sh"]
-        args: ["-c", "iostat -w 2 -x -m"]
+        args: ["-c", "iostat -x 2 -m"]
         resources:
           requests:
             cpu: "500m"
