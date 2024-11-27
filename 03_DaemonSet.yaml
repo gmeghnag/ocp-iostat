@@ -21,6 +21,8 @@ spec:
       hostPID: true
       hostIPC: true
       hostNetwork: true
+      nodeSelector:
+        kubernetes.io/os: linux
       tolerations:
       - operator: Exists
       containers:
